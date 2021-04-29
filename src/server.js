@@ -1,17 +1,15 @@
 const express = require('express');
 const app = express();
 
-const { soma, multiplicacao } = require('./operacoes');
+const port = 3000;
+const host = "0.0.0.0";
 
-console.log(soma(10,20));
-console.log(multiplicacao(10,20));
+const defaultRoutes = require('./routes/default-routes');
+const usuariosRouter = require('./routes/usuarios-routes');
 
-const port = 3000
+app.use('/', defaultRoutes);
+app.use('/api/usuarios', usuariosRouter);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(port, host, () => {
+  console.log(`Example app listening at http://${host}:${port}`)
 })
