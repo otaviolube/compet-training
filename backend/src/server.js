@@ -4,6 +4,12 @@ const app = express();
 const port = 3000;
 const host = "0.0.0.0";
 
+app.use(express.urlencoded({
+  extended: true
+})); 
+
+app.use(express.json());
+
 const defaultRoutes = require('./routes/default-routes');
 const usuariosRouter = require('./routes/usuarios-routes');
 
