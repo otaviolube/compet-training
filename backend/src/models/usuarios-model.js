@@ -24,4 +24,5 @@ const UsuarioModel = db.define('Usuario', {
 
 UsuarioModel.sync();
 
+
 module.exports = UsuarioModel;

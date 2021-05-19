@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    command: --init-file /data/application/init.sql
+    restart: always
+    volumes: 
+        - ./backend/src/infra/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: compet
+      MYSQL_DATABASE: compet
+    networks: 
+        - api-network
+  api:
+    build: ./backend/
+    image: otaviolube/compet:v1
+    restart: always
+    depends_on: 
+        - mysql
+    ports:
+        - 3000:3000
+    networks: 
+        - api-network
+
+networks: 
+    api-network:
+        driver: bridge

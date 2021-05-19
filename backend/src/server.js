@@ -1,8 +1,14 @@
+require('dotenv').config({
+  path: process.env.NODE_ENV === "development" ? ".env.development" : ".env"
+});
+
+console.log(process.env.NODE_ENV);
+
 const express = require('express');
 const app = express();
 
-const port = 3000;
-const host = "0.0.0.0";
+const port = process.env.APP_PORT;
+const host = process.env.APP_HOSTNAME;
 
 app.use(express.urlencoded({
   extended: true
